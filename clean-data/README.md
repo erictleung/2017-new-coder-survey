@@ -6,7 +6,7 @@ The survey data is cleaned and the metadata (i.e. data dictionary) is in the
 `datapackage.json` file, which follows closely to the specifications described
 by the [data packages format][datapkg].
 
-[datapkg]: http://frictionlessdata.io/data-packages/
+[datapkg]: http://specs.frictionlessdata.io/simple-data-format/
 
 ## Prerequisites for Data Cleaning Rerun
 
