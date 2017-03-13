@@ -1,0 +1,78 @@
+{
+  "name": "2017-new-coder-survey",
+  "title": "2017 freeCodeCamp's New Coder Survey",
+  "description": "Survey data including demographic and coding related activities",
+  "keywords": ["survey", "freeCodeCamp", "coding", "programming"],
+  "sources": [{
+    "name": "2017-new-coder-survey",
+    "web": "https://github.com/freeCodeCamp/2016-new-coder-survey"
+  }],
+  "resources": [
+    {
+      "name": "2017-fCC-New-Coders-Survey-Data",
+      "path": "./2017-fCC-New-Coders-Survey-Data.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "schema": {
+        "fields": [
+          {
+            "name": "ID",
+            "description": "Unique identifier",
+            "type": "string",
+            "constraints": {
+              "unique": true
+            }
+          },
+          {
+            "name": "Age",
+            "description": "How old are you?",
+            "type": "integer",
+            "constraints": {
+              "minimum": 12,
+              "maximum": 62
+            }
+          },
+          {
+            "name": "Gender",
+            "description": "What's your gender?",
+            "type": "string",
+            "constraints": {
+              "enum": [ "agender", "female", "genderqueer", "male", "trans" ]
+            }
+          },
+          {
+            "name": "CountryCitizen",
+            "description": "Which country are you a citizen of?",
+            "type": "string",
+          },
+          {
+            "name": "CountryLive",
+            "description": "Which country do you currently live in?",
+            "type": "string",
+          },
+          {
+            "name": "CityPopulation",
+            "description": "About how many people live in your city?",
+            "type": "string",
+            "constraints": {
+              "enum": [ "between 100,000 and 1 million", "less than 100,000", "more than 1 million" ]
+            }
+          },
+          {
+            "name": "IsEthnicMinority",
+            "description": "Are you an ethnic minority in your country?",
+            "type": "boolean"
+          },
+          {
+            "name": "LanguageAtHome",
+            "description": "Which language do you speak at home with your family?",
+            "type": "string"
+          }
+        ],
+        "missingValues": [
+          "NA"
+        ]
+      }
+    }
+  ]
+}
