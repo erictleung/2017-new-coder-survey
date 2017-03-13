@@ -13,6 +13,9 @@ by the [data packages format][datapkg].
 - [R][r] (>= 3.3.3)
 - [dplyr][dplyr] (>= 0.5.0)
 
+[r]: https://www.r-project.org/
+[dplyr]: https://cran.r-project.org/package=dplyr
+
 ## Run Cleaning Script
 
 ```shell
