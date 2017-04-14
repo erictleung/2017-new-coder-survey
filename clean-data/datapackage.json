@@ -5,7 +5,7 @@
   "keywords": ["survey", "freeCodeCamp", "coding", "programming"],
   "sources": [{
     "name": "2017-new-coder-survey",
-    "web": "https://github.com/freeCodeCamp/2016-new-coder-survey"
+    "web": "https://github.com/freeCodeCamp/2017-new-coder-survey"
   }],
   "resources": [
     {
@@ -43,12 +43,12 @@
           {
             "name": "CountryCitizen",
             "description": "Which country are you a citizen of?",
-            "type": "string",
+            "type": "string"
           },
           {
             "name": "CountryLive",
             "description": "Which country do you currently live in?",
-            "type": "string",
+            "type": "string"
           },
           {
             "name": "CityPopulation",
