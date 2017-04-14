@@ -6,15 +6,16 @@
 #                   function to perform the entire cleaning and combining is
 #                   the `main()` function at the end of this script.
 # Author:           Eric Leung (@erictleung)
-# Last Updated:     2017 March 12th
+# Last Updated:     2017 April 14th
 
 # Load in necessary packages
 require(dplyr)     # Manipulate data
+require(tidyr)     # Reshape data
 require(hunspell)  # Check spelling
-require(reshape2)  # Reshape data
 
 # Variables
-dataPath <- "../raw-data/2017-Survey-of-New-Coders-Part-2-report.csv"
+dataPath1 <- "../raw-data/2017-new-coder-survey-part-1.csv"
+dataPath2 <- "../raw-data/2017-new-coder-survey-part-2.csv"
 
 # Utility Functions ---------------------------------------
 # Description:
@@ -1402,20 +1403,24 @@ clean_children <- function(cleanPart) {
 # Description:
 #   First function that should be run to read in the data for cleaning
 # Usage:
-#   > allData <- read_in_data()
+#   > allData <- read_in_data(part1Path, part2Path)
 #   > allData$part1 # access first part
 #   > allData$part2 # access second part
-read_in_data <- function(dataPath) {
+read_in_data <- function(part1Path, part2Path) {
     cat("Reading in survey data for cleaning...\n")
 
     # Read in data
-    survey <- read.csv(
-        file = dataPath,
+    survey1 <- read.csv(
+        file = part1Path,
+        stringsAsFactors = FALSE,
+        na.strings = "") %>% tbl_df()
+    survey2 <- read.csv(
+        file = part2Path,
         stringsAsFactors = FALSE,
         na.strings = "") %>% tbl_df()
 
     cat("Finished reading in survey data.\n")
-    list(survey = survey)
+    list(part1 = survey1, part2 = survey2)
 }
 
 
@@ -1933,14 +1938,15 @@ polish_data <- function(cleanData) {
 #   file in the `clean-data/` directory.
 # Usage:
 #   > main()
-main <- function() {
-    dat <- read_in_data(dataPath) # Read in data
+main <- function(dataPath1, dataPath2) {
+    dat <- read_in_data(dataPath1, dataPath2) # Read in data
 
     # Change column names to something easier to use
-    part <- rename_part_2(dat$survey)
+    part1 <- rename_part_1(dat$part1)
+    part2 <- rename_part_2(dat$part2)
 
     # Make variables between datasets consistent for joining
-    consistentData <- std_data_type(part)
+    consistentData <- std_data_type(part1, part2)
 
     # Join datasets together
     key <- c("IsSoftwareDev", "JobPref", "JobApplyWhen", "ExpectedEarning",
@@ -1966,4 +1972,4 @@ main <- function() {
               na = "NA",
               row.names = FALSE)
 }
-main()
+main(dataPath1, dataPath2)
