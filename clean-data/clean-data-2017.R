@@ -6,7 +6,7 @@
 #                   function to perform the entire cleaning and combining is
 #                   the `main()` function at the end of this script.
 # Author:           Eric Leung (@erictleung)
-# Last Updated:     2017 April 14th
+# Last Updated:     2017 April 18th
 
 # Load in necessary packages
 require(dplyr)     # Manipulate data
@@ -1438,11 +1438,35 @@ rename_part_1 <- function(part1) {
     ) %>% rename(
         IsSoftwareDev = Are.you.already.working.as.a.software.developer.
     ) %>% rename(
+        FirstDevJob = Is.this.your.first.software.development.job.
+    ) %>% rename(
         JobPref = Would.you.prefer.to...
     ) %>% rename(
-        JobRoleInterest = Which.one.of.these.roles.are.you.most.interested.in.
+        JobInterestFullStack = Full.Stack.Web.Developer
     ) %>% rename(
-        JobRoleInterestOther = Other
+        JobInterestBackEnd = Back.End.Web.Developer
+    ) %>% rename(
+        JobInterestFrontEnd = X..Front.End.Web.Developer
+    ) %>% rename(
+        JobInterestMobile = X..Mobile.Developer
+    ) %>% rename(
+        JobInterestDevOps = X..DevOps...SysAdmin
+    ) %>% rename(
+        JobInterestDataSci = X..Data.Scientist
+    ) %>% rename(
+        JobInterestQAEngr = X..Quality.Assurance.Engineer
+    ) %>% rename(
+        JobInterestUX = X..User.Experience.Designer
+    ) %>% rename(
+        JobInterestProjMngr = X..Product.Manager
+    ) %>% rename(
+        JobInterestGameDev = Game.Developer
+    ) %>% rename(
+        JobInterestInfoSec = Information.Security
+    ) %>% rename(
+        JobInterestDataEngr = Data.Engineer
+    ) %>% rename(
+        JobInterestOther = Other
     ) %>% rename(
         JobApplyWhen = When.do.you.plan.to.start.applying.for.developer.jobs.
     ) %>% rename(
@@ -1452,37 +1476,17 @@ rename_part_1 <- function(part1) {
     ) %>% rename(
         JobRelocate = Are.you.willing.to.relocate.for.a.job.
     ) %>% rename(
-        CodeEventCoffee = coffee.and.codes
-    ) %>% rename(
-        CodeEventHackathons = hackathons
-    ) %>% rename(
-        CodeEventConferences = conferences
-    ) %>% rename(
-        CodeEventNodeSchool = NodeSchool
-    ) %>% rename(
-        CodeEventRailsBridge = RailsBridge
-    ) %>% rename(
-        CodeEventStartUpWknd = Startup.Weekend
-    ) %>% rename(
-        CodeEventWomenCode = Women.Who.Code
-    ) %>% rename(
-        CodeEventGirlDev = Girl.Develop.It
-    ) %>% rename(
-        CodeEventNone = None
-    ) %>% rename(
-        CodeEventOther = Other.1
+        ResourceFCC = freeCodeCamp
     ) %>% rename(
         ResourceEdX = EdX
     ) %>% rename(
         ResourceCoursera = Coursera
     ) %>% rename(
-        ResourceFCC = Free.Code.Camp
+        ResourceKA = Khan.Academy
     ) %>% rename(
-        ResourceKhanAcademy = Khan.Academy
+        ResourcePluralSight = Pluralsight...Code.School
     ) %>% rename(
-        ResourcePluralSight = Code.School..Pluralsight.
-    ) %>% rename(
-        ResourceCodeacademy = Codecademy
+        ResourceCodecademy = Codecademy
     ) %>% rename(
         ResourceUdacity = Udacity
     ) %>% rename(
@@ -1492,9 +1496,55 @@ rename_part_1 <- function(part1) {
     ) %>% rename(
         ResourceOdinProj = The.Odin.Project
     ) %>% rename(
-        ResourceDevTips = DevTips
+        ResourceTreehouse = Treehouse
     ) %>% rename(
-        ResourceOther = Other.2
+        ResourceLynda = Lynda.com
+    ) %>% rename(
+        ResourceSO = Stack.Overflow
+    ) %>% rename(
+        ResourceW3S = W3Schools
+    ) %>% rename(
+        ResourceSkillcrush = Skillcrush
+    ) %>% rename(
+        ResourceHackerRank = HackerRank
+    ) %>% rename(
+        ResourceMDN = Mozilla.Developer.Network..MDN.
+    ) %>% rename(
+        ResourceEgghead = Egghead.io
+    ) %>% rename(
+        ResourceCSS = CSS.Tricks
+    ) %>% rename(
+        ResourceOther = Other.1
+    ) %>% rename(
+        CodeEventFCC = freeCodeCamp.study.groups
+    ) %>% rename(
+        CodeEventHackathons = hackathons
+    ) %>% rename(
+        CodeEventConferences = conferences
+    ) %>% rename(
+        CodeEventWorkshops = workshops
+    ) %>% rename(
+        CodeEventStartUpWknd = Startup.Weekend
+    ) %>% rename(
+        CodeEventNodeSchool = NodeSchool
+    ) %>% rename(
+        CodeEventWomenCode = Women.Who.Code
+    ) %>% rename(
+        CodeEventGirlDev = Girl.Develop.It
+    ) %>% rename(
+        CodeEventMeetup = Meetup.com.events
+    ) %>% rename(
+        CodeEventRailsBridge = RailsBridge
+    ) %>% rename(
+        CodeEventGameJam = Game.Jam
+    ) %>% rename(
+        CodeEventRailsGirls = Rails.Girls
+    ) %>% rename(
+        CodeEventDjangoGirls = Django.Girls
+    ) %>% rename(
+        CodeEventWkdBootcamps = weekend.bootcamps
+    ) %>% rename(
+        CodeEventOther = Other.2
     ) %>% rename(
         PodcastCodeNewbie = Code.Newbie
     ) %>% rename(
@@ -1504,9 +1554,63 @@ rename_part_1 <- function(part1) {
     ) %>% rename(
         PodcastJSJabber = JavaScript.Jabber
     ) %>% rename(
-        PodcastNone = None.1
+        PodcastRubyRogues = Ruby.Rogues
+    ) %>% rename(
+        PodcastShopTalk = Shop.Talk.Show
+    ) %>% rename(
+        PodcastDevTea = Developer.Tea
+    ) %>% rename(
+        PodcastProgThrowdown = Programming.Throwdown
+    ) %>% rename(
+        PodcastDotNET = .NET.Rocks
+    ) %>% rename(
+        PodcastTalkPython = Talk.Python.To.Me
+    ) %>% rename(
+        PodcastJSAir = JavaScript.Air
+    ) %>% rename(
+        PodcastTheWebAhead = The.Web.Ahead
+    ) %>% rename(
+        PodcastCodePen = CodePen.Radio
+    ) %>% rename(
+        PodcastGiantRobots = Giant.Robots.Smashing.into.Other.Giant.Robots
+    ) %>% rename(
+        PodcastSERadio = Software.Engineering.Radio
     ) %>% rename(
         PodcastOther = Other.3
+    ) %>% rename(
+        YouTubeMIT = MIT.Open.Courseware
+    ) %>% rename(
+        YouTubeTheNewBoston = The.New.Boston
+    ) %>% rename(
+        YouTubeFCC = freeCodeCamp.1
+    ) %>% rename(
+        YouTubeComputerphile = Computerphile
+    ) %>% rename(
+        YouTubeDevTips = DevTips
+    ) %>% rename(
+        YouTubeEngineeredTruth = Engineered.Truth
+    ) %>% rename(
+        YouTubeLearnCode = LearnCode.Academy
+    ) %>% rename(
+        YouTubeCodeCourse = CodeCourse
+    ) %>% rename(
+        YouTubeLevelUpTuts = LevelUpTuts
+    ) %>% rename(
+        YouTubeFunFunFunction = funfunfunction
+    ) %>% rename(
+        YouTubeCodingTut360 = Coding.Tutorials.360
+    ) %>% rename(
+        YouTubeCodingTrain = Coding.Train..Coding.Rainbow.
+    ) %>% rename(
+        YouTubeDerekBanas = Derek.Banas
+    ) %>% rename(
+        YouTubeSimplilearn = Simplilearn
+    ) %>% rename(
+        YouTubeMozillaHacks = Mozilla.Hacks
+    ) %>% rename(
+        YouTubeGoogleDev = Google.Developers
+    ) %>% rename(
+        YouTubeOther = Other.4
     ) %>% rename(
         HoursLearning = About.how.many.hours.do.you.spend.learning.each.week.
     ) %>% rename(
@@ -1517,12 +1621,6 @@ rename_part_1 <- function(part1) {
         BootcampName = Which.one.
     ) %>% rename(
         BootcampFinish = Have.you.finished.yet.
-    ) %>% rename(
-        BootcampMonthsAgo = How.many.months.ago.
-    ) %>% rename(
-        BootcampFullJobAfter = Were.you.able.to.get.a.full.time.developer.job.afterward.
-    ) %>% rename(
-        BootcampPostSalary = How.much.was.your.salary.
     ) %>% rename(
         BootcampLoan = Did.you.take.out.a.loan.to.pay.for.the.bootcamp.
     ) %>% rename(
@@ -1941,6 +2039,10 @@ polish_data <- function(cleanData) {
 main <- function(dataPath1, dataPath2) {
     dat <- read_in_data(dataPath1, dataPath2) # Read in data
 
+    # Remove unused columns
+    dat$part1 <- dat$part1 %>%
+        select(-Before.you.got.this.job..how.many.months.did.you.spend.looking.for.a.job.)
+
     # Change column names to something easier to use
     part1 <- rename_part_1(dat$part1)
     part2 <- rename_part_2(dat$part2)
@@ -1972,4 +2074,3 @@ main <- function(dataPath1, dataPath2) {
               na = "NA",
               row.names = FALSE)
 }
-main(dataPath1, dataPath2)
