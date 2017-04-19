@@ -1715,9 +1715,9 @@ rename_part_2 <- function(part2) {
     ) %>% rename(
         SchoolMajor = What.was.the.main.subject.you.studied.in.university.
     ) %>% rename(
-        HasFinancialDependents = Do.you.financially.support.any.dependents.
-    ) %>% rename(
         MaritalStatus = What.s.your.marital.status.
+    ) %>% rename(
+        HasFinancialDependents = Do.you.financially.support.any.dependents.
     ) %>% rename(
         HasChildren = Do.you.have.children.
     ) %>% rename(
@@ -1777,7 +1777,7 @@ rename_part_2 <- function(part2) {
     ) %>% rename(
         BootcampYesNo = attend_bootcamp
     ) %>% rename(
-        Bootcamp = which_bootcamp
+        BootcampName = which_bootcamp
     ) %>% rename(
         BootcampFinish = finished_bootcamp
     ) %>% rename(
@@ -1789,9 +1789,9 @@ rename_part_2 <- function(part2) {
     ) %>% rename(
         Podcast = podcast
     ) %>% rename(
-        YouTube = youtube
-    ) %>% rename(
         JobApplyWhen = how_soon_jobhunt
+    ) %>% rename(
+        YouTube = youtube
     ) %>% rename(
         Part2StartTime = Start.Date..UTC.
     ) %>% rename(
