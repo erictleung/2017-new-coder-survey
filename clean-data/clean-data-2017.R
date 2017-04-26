@@ -2047,6 +2047,10 @@ main <- function(dataPath1, dataPath2) {
     part1 <- rename_part_1(dat$part1)
     part2 <- rename_part_2(dat$part2)
 
+    # Remove survey-year specific outliers
+    allXs <- part2 %>% filter(ExpectedEarning == "xxxxx")
+    part2 <- part2 %>% setdiff(allXs)
+
     # Make variables between datasets consistent for joining
     consistentData <- std_data_type(part1, part2)
 
