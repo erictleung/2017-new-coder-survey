@@ -1822,19 +1822,9 @@ rename_part_2 <- function(part2) {
 std_data_type <- function(part1, part2) {
     cat("Standardizing variables between data for joining...\n")
 
-    # Change the string "undefined" to built in "NA"
-    changeCols <- c("IsSoftwareDev", "JobRoleInterest", "JobPref",
-                    "ExpectedEarning", "JobWherePref", "JobRelocate",
-                    "HoursLearning", "MonthsProgramming", "BootcampYesNo",
-                    "BootcampFinish", "BootcampFullJobAfter",
-                    "BootcampPostSalary", "BootcampLoan", "BootcampRecommend",
-                    "MoneyForLearning", "BootcampMonthsAgo", "JobApplyWhen")
-    part2 <- undefined_to_NA(part2, changeCols)
-
     # Change "Yes"/"No" to "1"/"0"
     changeCols <- c("IsSoftwareDev", "JobRelocate", "BootcampYesNo",
-                    "BootcampFinish", "BootcampFullJobAfter", "BootcampLoan",
-                    "BootcampRecommend")
+                    "BootcampFinish", "BootcampLoan", "BootcampRecommend")
     part2 <- yesNo_to_oneZero(part2, changeCols)
 
     # Fix truncated answers in when you're applying to jobs question
@@ -1843,11 +1833,8 @@ std_data_type <- function(part1, part2) {
 
     # Standardize data types between data sets to allow joining
     toChr <- c("IsSoftwareDev", "JobRelocate", "BootcampYesNo",
-               "BootcampFinish", "BootcampFullJobAfter",
-               "BootcampLoan", "BootcampRecommend")
+               "BootcampFinish", "BootcampLoan", "BootcampRecommend")
     part1 <- change_to_chr(part1, toChr)
-    toDbl <- c("BootcampMonthsAgo", "BootcampPostSalary")
-    part2 <- change_to_dbl(part2, toDbl)
 
     cat("Finished standardizing variables between data.\n")
     list(part1 = part1, part2 = part2)
