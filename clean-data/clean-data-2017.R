@@ -17,6 +17,63 @@ require(hunspell)  # Check spelling
 dataPath1 <- "../raw-data/2017-new-coder-survey-part-1.csv"
 dataPath2 <- "../raw-data/2017-new-coder-survey-part-2.csv"
 
+# Script Outline
+#   1. Utility Functions - take in arguments to perform simpler transformations
+#   2. Sub-Process Functions - sub components within sub-cleaning functions
+#   3. Sub-Cleaning Functions - smaller components for main processing
+#   4. Main Processing Functions - big, main components of cleaning
+#   5. Main Function - runs entire script to clean data set
+
+# Exploratory Functions -----------------------------------
+# Description:
+#   These functions help do initial exploration of the data
+
+# Take a peak at data, some unique counts, and push up to view all
+sel_count_view <- function(data, col) {
+    data %>% select_(col) %>% print
+    data %>% count_(col) %>% print
+    data %>% count_(col) %>% View
+}
+
+# Search for column name between two data frames
+both_parts_same_col <- function(data1, data2, col) {
+    # Get column names for each data set
+    col1names <- data1 %>% colnames
+    col2names <- data2 %>% colnames
+
+    # Get indices
+    col1idx <- col1names %>% grep(col, ., ignore.case = TRUE)
+    col2idx <- col2names %>% grep(col, ., ignore.case = TRUE)
+
+    # Print column names shared if they exist
+    if (length(col1names) == 0 || length(col2names) == 0) {
+        print("No shared column")
+    } else {
+        cat("Variable names in first input:\n")
+        col1names[col1idx] %>% print()
+        cat("Variable names in second input:\n")
+        col2names[col2idx] %>% print()
+    }
+}
+
+# Check if same name column between data sets are the same
+is_same_dt <- function(data1, data2, col) {
+    # Get columns
+    df1df <- data1 %>% select_(col) %>% head
+    df2df <- data2 %>% select_(col) %>% head
+
+    # Take a peak of columns
+    df1df %>% print
+    df2df %>% print
+
+    # Get actual class name
+    df1dt <- df1df %>% unlist %>% class
+    df2dt <- df2df %>% unlist %>% class
+
+    # Check if data types are the same
+    df1dt == df2dt
+}
+
 # Utility Functions ---------------------------------------
 # Description:
 #   These functions take in arguments to perform simpler transformations
