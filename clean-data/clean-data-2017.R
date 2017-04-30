@@ -89,6 +89,10 @@ is_same_dt <- function(data1, data2, col) {
 # Output:
 #   String or vector of strings
 # Usage:
+#   > fix_truncate_job_apply("I")
+#   [1] "I'm already applying"
+#   > fix_truncate_job_apply("I haven")
+#   [1] "I haven't decided"
 fix_truncate_job_apply <- function(answer) {
     truncateAns <- c()
     for (i in 1:length(answer)) {
