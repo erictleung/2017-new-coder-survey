@@ -231,6 +231,17 @@ remove_outlier <- function(x, thres) {
 }
 
 
+# Title:
+#   Filter and Diff
+# Description:
+#   This function takes a filter criteria and applies it. It will remove this
+#   row from the data set.
+filter_and_diff <- function(data, filt) {
+    outlierRows <- data %>% filter_(filt)
+    data %>% setdiff(outlierRows)
+}
+
+
 # Sub-Process Functions -----------------------------------
 # Description:
 #   These functions perform larger grouped data transformations
@@ -1885,6 +1896,18 @@ rename_part_2 <- function(part2) {
 
     cat("Finished renaming Part 2 of the survey.\n")
     newPart2
+}
+
+
+# Title:
+#   Remove obvious outliers
+# Description:
+#   This function removes obvious outliers, which most likely are fake because
+#   they don't even try to answer the question
+# Usage:
+# part1 <- rm_obv_outliers(part1)
+rm_obv_outliers <- function(part) {
+    part
 }
 
 
