@@ -58,20 +58,27 @@ both_parts_same_col <- function(data1, data2, col) {
 
 # Check if same name column between data sets are the same
 is_same_dt <- function(data1, data2, col) {
-    # Get columns
-    df1df <- data1 %>% select_(col) %>% head
-    df2df <- data2 %>% select_(col) %>% head
+    # Check for columns in data sets before selection
+    dat1cols <- data1 %>% colnames()
+    dat2cols <- data2 %>% colnames()
+    if (col %in% dat1cols & col %in% dat2cols) {
+        # Get columns
+        df1df <- data1 %>% select_(col) %>% head
+        df2df <- data2 %>% select_(col) %>% head
 
-    # Take a peak of columns
-    df1df %>% print
-    df2df %>% print
+        # Take a peak of columns
+        df1df %>% print
+        df2df %>% print
 
-    # Get actual class name
-    df1dt <- df1df %>% unlist %>% class
-    df2dt <- df2df %>% unlist %>% class
+        # Get actual class name
+        df1dt <- df1df %>% unlist %>% class
+        df2dt <- df2df %>% unlist %>% class
 
-    # Check if data types are the same
-    df1dt == df2dt
+        # Check if data types are the same
+        df1dt == df2dt
+    } else {
+        cat("No such column in the data. Please check spelling.")
+    }
 }
 
 # Utility Functions ---------------------------------------
