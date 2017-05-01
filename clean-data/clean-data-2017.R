@@ -1894,7 +1894,9 @@ std_data_type <- function(part1, part2) {
 
     # Standardize data types between data sets to allow joining
     toChr <- c("IsSoftwareDev", "JobRelocate", "BootcampYesNo",
-               "BootcampFinish", "BootcampLoan", "BootcampRecommend")
+               "BootcampFinish", "BootcampLoan", "BootcampRecommend",
+               "ExpectedEarning", "MonthsProgramming", "MoneyForLearning",
+               "HoursLearning")
     part1 <- change_to_chr(part1, toChr)
 
     cat("Finished standardizing variables between data.\n")
@@ -2106,9 +2108,8 @@ main <- function(dataPath1, dataPath2) {
     key <- c("IsSoftwareDev", "JobPref", "JobApplyWhen", "ExpectedEarning",
              "JobWherePref", "JobRelocate", "BootcampYesNo",
              "MonthsProgramming", "BootcampFinish",
-             "BootcampFullJobAfter", "BootcampPostSalary", "BootcampLoan",
-             "BootcampRecommend", "MoneyForLearning", "NetworkID",
-             "HoursLearning", "BootcampMonthsAgo", "BootcampName" = "Bootcamp")
+             "BootcampLoan", "BootcampRecommend", "MoneyForLearning",
+             "NetworkID", "HoursLearning", "BootcampName")
     allData <- left_join(consistentData$part1, consistentData$part2, by = key)
 
     # Check survey times and unique IDs
