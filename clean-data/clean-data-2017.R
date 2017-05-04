@@ -537,7 +537,7 @@ clean_job_interest <- function(part) {
     colsChange <- c("JobInterestFullStack", "JobInterestBackEnd",
                     "JobInterestFrontEnd", "JobInterestMobile",
                     "JobInterestDevOps", "JobInterestDataSci",
-                    "JobInterstQAEngr", "JobInterestUX",
+                    "JobInterestQAEngr", "JobInterestUX",
                     "JobInterestProjMngr", "JobInterestGameDev",
                     "JobInterestDataEngr")
 
@@ -573,7 +573,7 @@ clean_job_interest_other <- function(part) {
                         "all of the above", "no preference", "not",
                         "any", "no idea", "idk", "dunno")
     cleanPart <- normalize_text(inData = cleanPart,
-                                columnName = "JobRoleInterestOther",
+                                columnName = "JobInterestOther",
                                 searchTerms = undecidedWords,
                                 replaceWith = "Undecided")
 
@@ -1548,11 +1548,8 @@ polish_data <- function(cleanData) {
     cleanData <- cleanData %>%
         mutate(Age = as.integer(Age)) %>%
         mutate(BootcampFinish = as.integer(BootcampFinish)) %>%
-        mutate(BootcampFullJobAfter = as.integer(BootcampFullJobAfter)) %>%
         mutate(BootcampLoan = as.integer(BootcampLoan)) %>%
         rename(BootcampLoanYesNo = BootcampLoan) %>%
-        mutate(BootcampMonthsAgo = as.integer(BootcampMonthsAgo)) %>%
-        mutate(BootcampPostSalary = as.integer(BootcampPostSalary)) %>%
         mutate(BootcampRecommend = as.integer(BootcampRecommend)) %>%
         mutate(BootcampYesNo = as.integer(BootcampYesNo)) %>%
         rename(AttendedBootcamp = BootcampYesNo) %>%
@@ -1567,7 +1564,6 @@ polish_data <- function(cleanData) {
 
     # Polish Code Events
     cleanData <- cleanData %>%
-        mutate(CodeEventCoffee = as.integer(CodeEventCoffee)) %>%
         mutate(CodeEventConferences = as.integer(CodeEventConferences)) %>%
         mutate(CodeEventGirlDev = as.integer(CodeEventGirlDev)) %>%
         mutate(CodeEventHackathons = as.integer(CodeEventHackathons)) %>%
@@ -1577,59 +1573,51 @@ polish_data <- function(cleanData) {
         mutate(CodeEventStartUpWknd = as.integer(CodeEventStartUpWknd)) %>%
         mutate(CodeEventWomenCode = as.integer(CodeEventWomenCode)) %>%
         mutate(CodeEventMeetup = as.integer(CodeEventMeetup)) %>%
-        mutate(CodeEventBootcamp = as.integer(CodeEventBootcamp)) %>%
+        mutate(CodeEventWkdBootcamps = as.integer(CodeEventWkdBootcamps)) %>%
         mutate(CodeEventRailsGirls = as.integer(CodeEventRailsGirls)) %>%
         mutate(CodeEventDjangoGirls = as.integer(CodeEventDjangoGirls)) %>%
         mutate(CodeEventGameJam = as.integer(CodeEventGameJam)) %>%
-        mutate(CodeEventWorkshop = as.integer(CodeEventWorkshop))
+        mutate(CodeEventWorkshops = as.integer(CodeEventWorkshops))
 
     # Polish Resources
     cleanData <- cleanData %>%
         mutate(ResourceCodeWars = as.integer(ResourceCodeWars)) %>%
-        mutate(ResourceCodeacademy = as.integer(ResourceCodeacademy)) %>%
-        rename(ResourceCodecademy = ResourceCodeacademy) %>%
+        mutate(ResourceCodecademy = as.integer(ResourceCodecademy)) %>%
         mutate(ResourceCoursera = as.integer(ResourceCoursera)) %>%
-        mutate(ResourceDevTips = as.integer(ResourceDevTips)) %>%
         mutate(ResourceEdX = as.integer(ResourceEdX)) %>%
         mutate(ResourceFCC = as.integer(ResourceFCC)) %>%
-        mutate(ResourceKhanAcademy = as.integer(ResourceKhanAcademy)) %>%
+        mutate(ResourceKA = as.integer(ResourceKA)) %>%
         mutate(ResourceOdinProj = as.integer(ResourceOdinProj)) %>%
         mutate(ResourcePluralSight = as.integer(ResourcePluralSight)) %>%
         mutate(ResourceUdacity = as.integer(ResourceUdacity)) %>%
         mutate(ResourceUdemy = as.integer(ResourceUdemy)) %>%
         mutate(ResourceTreehouse = as.integer(ResourceTreehouse)) %>%
         mutate(ResourceLynda = as.integer(ResourceLynda)) %>%
-        mutate(ResourceStackOverflow = as.integer(ResourceStackOverflow)) %>%
-        mutate(ResourceBooks = as.integer(ResourceBooks)) %>%
-        mutate(ResourceW3Schools = as.integer(ResourceW3Schools)) %>%
-        mutate(ResourceSkillCrush = as.integer(ResourceSkillCrush)) %>%
-        mutate(ResourceYouTube = as.integer(ResourceYouTube)) %>%
-        mutate(ResourceGoogle = as.integer(ResourceGoogle)) %>%
+        mutate(ResourceSO = as.integer(ResourceSO)) %>%
+        mutate(ResourceW3S = as.integer(ResourceW3S)) %>%
+        mutate(ResourceSkillcrush = as.integer(ResourceSkillcrush)) %>%
         mutate(ResourceHackerRank = as.integer(ResourceHackerRank)) %>%
-        mutate(ResourceReddit = as.integer(ResourceReddit)) %>%
         mutate(ResourceMDN = as.integer(ResourceMDN)) %>%
-        mutate(ResourceSoloLearn = as.integer(ResourceSoloLearn)) %>%
-        mutate(ResourceBlogs = as.integer(ResourceBlogs)) %>%
-        mutate(ResourceEggHead = as.integer(ResourceEggHead))
+        mutate(ResourceEgghead = as.integer(ResourceEgghead))
 
     # Polish Podcasts
     cleanData <- cleanData %>%
         mutate(PodcastChangeLog = as.integer(PodcastChangeLog)) %>%
         mutate(PodcastCodeNewbie = as.integer(PodcastCodeNewbie)) %>%
+        mutate(PodcastCodePen = as.integer(PodcastCodePen)) %>%
+        mutate(PodcastDevTea = as.integer(PodcastDevTea)) %>%
+        mutate(PodcastDotNET = as.integer(PodcastDotNET)) %>%
+        mutate(PodcastGiantRobots = as.integer(PodcastGiantRobots)) %>%
+        mutate(PodcastJSAir = as.integer(PodcastJSAir)) %>%
         mutate(PodcastJSJabber = as.integer(PodcastJSJabber)) %>%
         mutate(PodcastNone = as.integer(PodcastNone)) %>%
-        mutate(PodcastSEDaily = as.integer(PodcastSEDaily)) %>%
         mutate(PodcastRubyRogues = as.integer(PodcastRubyRogues)) %>%
+        mutate(PodcastProgThrowdown = as.integer(PodcastProgThrowdown)) %>%
+        mutate(PodcastSEDaily = as.integer(PodcastSEDaily)) %>%
+        mutate(PodcastSERadio = as.integer(PodcastSERadio)) %>%
         mutate(PodcastShopTalk = as.integer(PodcastShopTalk)) %>%
-        mutate(PodcastDeveloperTea = as.integer(PodcastDeveloperTea)) %>%
-        mutate(PodcastProgrammingThrowDown =
-                   as.integer(PodcastProgrammingThrowDown)) %>%
-        mutate(PodcastDotNetRocks = as.integer(PodcastDotNetRocks)) %>%
         mutate(PodcastTalkPython = as.integer(PodcastTalkPython)) %>%
-        mutate(PodcastJsAir = as.integer(PodcastJsAir)) %>%
-        mutate(PodcastHanselminutes = as.integer(PodcastHanselminutes)) %>%
-        mutate(PodcastWebAhead = as.integer(PodcastWebAhead)) %>%
-        mutate(PodcastCodingBlocks = as.integer(PodcastCodingBlocks))
+        mutate(PodcastTheWebAhead = as.integer(PodcastTheWebAhead))
 
     # Order columns alphabetically
     cleanData <- cleanData %>% select(noquote(order(colnames(cleanData))))
