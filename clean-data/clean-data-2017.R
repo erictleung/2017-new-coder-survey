@@ -1950,6 +1950,28 @@ std_data_type <- function(part1, part2) {
 
 
 # Title:
+#   Joining Data Sets
+# Description:
+#   Uses shared information in the columns between the data sets to join them
+#   together
+join_data <- function(part1, part2) {
+    # Different shared columns between the two parts
+    sharedCols1 <- c("JobInterestOther", "ResourceOther", "CodeEventOther",
+                     "PodcastOther", "YouTubeOther")
+    sharedCols2 <- c("JobRoleInterest")
+
+    # Static answers for job interest
+    jobInterests <- c("Full-Stack Web Developer", "Back-End Web Developer",
+                      "Front-End Web Developer", "Mobile Developer",
+                      "DevOps / SysAdmin", "Data Scientist",
+                      "Quality Assurance Engineer", "User Experience Designer",
+                      "Project Manager", "Game Developer",
+                      "Information Security", "Data Engineer")
+    part2 %>% separate_rows(sharedCols2[1], sep = ",")
+}
+
+
+# Title:
 #   Survey Parts Sanity Check
 # Description:
 #   After joining the two datasets together, there were some inconsistencies
