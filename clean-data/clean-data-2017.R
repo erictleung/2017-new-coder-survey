@@ -945,21 +945,9 @@ clean_resources <- function(cleanPart) {
 clean_student_debt <- function(cleanPart) {
     cat("Cleaning responses for student debt owed...\n")
 
-    # Remove commas from expected earnings
-    commaIdx <- cleanPart %>% select(StudentDebtOwe) %>%
-        mutate_each(funs(grepl(",", ., ignore.case = TRUE))) %>%
-        unlist(use.names = FALSE)
-    commaData <- cleanPart %>% filter(commaIdx) %>%
-        mutate(StudentDebtOwe = sub(",", "", StudentDebtOwe))
-    cleanPart <- cleanPart %>% filter(!commaIdx) %>% bind_rows(commaData)
-
-    # Change to integer
+    # Make mimimum student debt to $100
     cleanPart <- cleanPart %>%
-        mutate(StudentDebtOwe = as.integer(StudentDebtOwe))
-
-    # Make mimimum student debt to $1000
-    cleanPart <- cleanPart %>%
-        mutate(StudentDebtOwe = ifelse(StudentDebtOwe < 1000,
+        mutate(StudentDebtOwe = ifelse(StudentDebtOwe < 100,
                                        yes = NA,
                                        no = StudentDebtOwe))
 
