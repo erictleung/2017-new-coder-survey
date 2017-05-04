@@ -986,6 +986,10 @@ clean_children <- function(cleanPart) {
                    ifelse(ChildrenNumber == 0, NA, ChildrenNumber))
     cleanPart <- bind_rows(naChildren, children)
 
+    # Remove outlier children
+    cleanPart <- cleanPart %>%
+        mutate(ChildrenNumber = ifelse(ChildrenNumber > 10, NA, ChildrenNumber))
+
     cat("Finished cleaning responses for number of children.\n")
     cleanPart
 }
