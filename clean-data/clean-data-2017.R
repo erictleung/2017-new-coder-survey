@@ -722,8 +722,9 @@ clean_podcasts <- function(cleanPart) {
     # Normalize variations of "None" in PodcastOther
     nonePod <- c("non", "none", "haven't", "havent", "not a",
                  "nothing", "didn't", "n/a", "\bna\b", "never",
-                 "nil", "nope", "not tried", "have not", "do not",
-                 "don't")
+                 "\bnil\b", "nope", "not tried", "have not", "do not",
+                 "don't", "\bno\b", "\bno one\b", "iduntlitsentopodcasts",
+                 "does not", "no idea", "not applicable")
     searchStr <- paste(nonePod, collapse = "|")
     nonesPodIdx <- cleanPart %>% select(PodcastOther) %>%
         mutate_each(funs(grepl(searchStr, ., ignore.case = TRUE))) %>%
@@ -733,90 +734,6 @@ clean_podcasts <- function(cleanPart) {
         mutate(PodcastNone = "1")
     cleanPart <- cleanPart %>% filter(!nonesPodIdx) %>%
         bind_rows(nonesPodData)
-
-    # Normalize variations of "Software Engineering Daily" in PodcastOther
-    sePod <- c("software engineering")
-    searchStr <- paste(sePod, collapse = "|")
-    sePodIdx <- cleanPart %>% select(PodcastOther) %>%
-        mutate_each(funs(grepl(searchStr, ., ignore.case = TRUE))) %>%
-        unlist(use.names = FALSE)
-    sePodData <- cleanPart %>% filter(sePodIdx) %>%
-        mutate(PodcastSEDaily = "1")
-    cleanPart <- cleanPart %>% filter(!sePodIdx) %>%
-        bind_rows(sePodData)
-
-    # New column for "Ruby Rogues"
-    rubyRogues <- c("rubyRogues", "ruby rogues", "ruby rogue")
-    cleanPart <- search_and_create(inData = cleanPart,
-                                   colName = "PodcastOther",
-                                   searchTerms = rubyRogues,
-                                   newCol = "PodcastRubyRogues")
-
-    # New column for "Shop Talk Show"
-    shopTalk <- c("shoptalk", "shop talk", "talk shop show",
-                  "shoptalkshow", "shop talk show", "talkshop")
-    cleanPart <- search_and_create(inData = cleanPart,
-                                   colName = "PodcastOther",
-                                   searchTerms = shopTalk,
-                                   newCol = "PodcastShopTalk")
-
-    # New column for "Developer Tea"
-    developerTea <- c("developertea", "developer's tea", "developer tea",
-                      "devtea")
-    cleanPart <- search_and_create(inData = cleanPart,
-                                   colName = "PodcastOther",
-                                   searchTerms = developerTea,
-                                   newCol = "PodcastDeveloperTea")
-
-    # New column for "Programming Throwdown"
-    progThrow <- c("programming throwdown", "programmer throwdown",
-                   "programing throwdown")
-    cleanPart <- search_and_create(inData = cleanPart,
-                                   colName = "PodcastOther",
-                                   searchTerms = progThrow,
-                                   newCol = "PodcastProgrammingThrowDown")
-
-    # New column for ".Net Rocks"
-    dotNet <- c("net rocks", "rocks", "dotnetrocks")
-    cleanPart <- search_and_create(inData = cleanPart,
-                                   colName = "PodcastOther",
-                                   searchTerms = dotNet,
-                                   newCol = "PodcastDotNetRocks")
-
-    # New column for "Talk Python to Me"
-    talkPython <- c("talk python", "talkpython")
-    cleanPart <- search_and_create(inData = cleanPart,
-                                   colName = "PodcastOther",
-                                   searchTerms = talkPython,
-                                   newCol = "PodcastTalkPython")
-
-    # New column for "JavaScript Air"
-    jsAir <- c("jsair", "js air", "javascript air")
-    cleanPart <- search_and_create(inData = cleanPart,
-                                   colName = "PodcastOther",
-                                   searchTerms = jsAir,
-                                   newCol = "PodcastJsAir")
-
-    # New column for "Hanselminutes"
-    hansel <- c("hanselminutes")
-    cleanPart <- search_and_create(inData = cleanPart,
-                                   colName = "PodcastOther",
-                                   searchTerms = hansel,
-                                   newCol = "PodcastHanselminutes")
-
-    # New column for "The Web Ahead"
-    webAhead <- c("web ahead")
-    cleanPart <- search_and_create(inData = cleanPart,
-                                   colName = "PodcastOther",
-                                   searchTerms = webAhead,
-                                   newCol = "PodcastWebAhead")
-
-    # New column for "Coding Blocks"
-    codingBlocks <- c("codingblocks", "coding blocks")
-    cleanPart <- search_and_create(inData = cleanPart,
-                                   colName = "PodcastOther",
-                                   searchTerms = codingBlocks,
-                                   newCol = "PodcastCodingBlocks")
 
     cat("Finished cleaning responses for other podcasts.\n")
     cleanPart
