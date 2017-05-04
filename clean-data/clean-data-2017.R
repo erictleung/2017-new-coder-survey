@@ -1262,19 +1262,9 @@ clean_part <- function(part) {
     cleanPart <- clean_student_debt(cleanPart)  # Clean student debt amount
     cleanPart <- clean_children(cleanPart)  # Clean children responses
 
-    # Remove inconsistent responses between job roles
-    jobRole <- cleanPart %>%
-        filter(is.na(JobRoleInterest.x)) %>%
-        filter(is.na(JobRoleInterestOther)) %>%
-        filter(!is.na(JobRoleInterest.y))
-    cleanPart <- cleanPart %>%
-        setdiff(jobRole) %>%
-        select(-JobRoleInterest.y) %>%
-        rename(JobRoleInterest = JobRoleInterest.x)
-
     # Remove unnecessary columns
     cleanPart <- cleanPart %>%
-        select(-OneTwoDiff, -Resources, -Podcast, -CodeEvent)
+        select(-OneTwoDiff, -Resources, -Podcast, -CodeEvent, -YouTube)
 
     cat("Finished cleaning survey data.\n")
     cleanPart
