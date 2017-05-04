@@ -842,39 +842,6 @@ clean_mortgage_amt <- function(cleanPart) {
 clean_income <- function(cleanPart) {
     cat("Cleaning responses for income...\n")
 
-    # Remove dollar signs from income
-    dollarIdx <- cleanPart %>% select(Income) %>%
-        mutate_each(funs(grepl("\\$", ., ignore.case = TRUE))) %>%
-        unlist(use.names = FALSE)
-    dollarData <- cleanPart %>% filter(dollarIdx) %>%
-        mutate(Income = sub("\\$", "", Income))
-    cleanPart <- cleanPart %>% filter(!dollarIdx) %>% bind_rows(dollarData)
-
-    # Remove commas from income
-    commaIdx <- cleanPart %>% select(Income) %>%
-        mutate_each(funs(grepl(",", ., ignore.case = TRUE))) %>%
-        unlist(use.names = FALSE)
-    commaData <- cleanPart %>% filter(commaIdx) %>%
-        mutate(Income = sub(",", "", Income))
-    cleanPart <- cleanPart %>% filter(!commaIdx) %>% bind_rows(commaData)
-
-    # Remove "k" from income
-    kIdx <- cleanPart %>% select(Income) %>%
-        mutate_each(funs(grepl("k", ., ignore.case = TRUE))) %>%
-        unlist(use.names = FALSE)
-    kData <- cleanPart %>% filter(kIdx) %>%
-        mutate(Income = sub("k", "000", Income))
-    cleanPart <- cleanPart %>% filter(!kIdx) %>% bind_rows(kData)
-
-    # Remove period from income like 50.000 which should be just 50000
-    thousandsIdx <- cleanPart %>% select(Income) %>%
-        mutate_each(funs(grepl("^\\d{2}\\.", ., ignore.case = TRUE))) %>%
-        unlist(use.names = FALSE)
-    thousandsData <- cleanPart %>% filter(thousandsIdx) %>%
-        mutate(Income = sub("\\.", "", Income))
-    cleanPart <- cleanPart %>% filter(!thousandsIdx) %>%
-        bind_rows(thousandsData)
-
     # Change all values to numeric for easier manipulation
     cleanPart <- cleanPart %>%
         mutate(Income = as.integer(Income))
@@ -917,13 +884,13 @@ clean_income <- function(cleanPart) {
     cleanPart <- cleanPart %>% setdiff(values500to5999) %>%
         bind_rows(change500to5999)
 
-    # Set limit to 200000
-    values200k <- cleanPart %>%
-        filter(Income > 200000)
-    change200k <- values200k %>%
-        mutate(Income = 200000)
-    cleanPart <- cleanPart %>% setdiff(values200k) %>%
-        bind_rows(change200k)
+    # Set limit to 1,000,000
+    values1m <- cleanPart %>%
+        filter(Income > 1000000)
+    change1m <- values1m %>%
+        mutate(Income = 1000000)
+    cleanPart <- cleanPart %>% setdiff(values1m) %>%
+        bind_rows(change1m)
 
     cat("Finished cleaning income.\n")
     cleanPart
