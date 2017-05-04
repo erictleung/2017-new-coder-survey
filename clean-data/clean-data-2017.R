@@ -775,48 +775,6 @@ clean_hours_learn <- function(cleanPart) {
 
 
 # Title:
-#   Clean Months Programming
-# Usage:
-#   > cleanPart <- clean_months_programming(cleanPart)
-clean_months_program <- function(cleanPart) {
-    cat("Cleaning responses for number of months programming...\n")
-
-    # Change years to months
-    yearsProgramIdx <- cleanPart %>% select(MonthsProgramming) %>%
-        mutate_each(funs(grepl("years", ., ignore.case = TRUE))) %>%
-        unlist(use.names = FALSE)
-    yearsProgramData <- cleanPart %>% filter(yearsProgramIdx) %>%
-        mutate(MonthsProgramming = years_to_months(MonthsProgramming))
-    cleanPart <- cleanPart %>% filter(!yearsProgramIdx) %>%
-        bind_rows(yearsProgramData)
-
-    # Remove non-numeric characters
-    cleanPart <- cleanPart %>% sub_and_rm(colName = "MonthsProgramming",
-                                          findStr = "[A-Za-z ]",
-                                          replaceStr = "")
-
-    # Average the range of months
-    avgMonthIdx <- cleanPart %>% select(MonthsProgramming) %>%
-        mutate_each(funs(grepl("-", ., ignore.case = TRUE))) %>%
-        unlist(use.names = FALSE)
-    avgMonthData <- cleanPart %>% filter(avgMonthIdx) %>%
-        mutate(MonthsProgramming = average_string_range(MonthsProgramming))
-    cleanPart <- cleanPart %>% filter(!avgMonthIdx) %>%
-        bind_rows(avgMonthData)
-
-    # Remove outlier months of programming
-    # 744 months = 62 years = 1954 = Year FORTRAN was invented
-    cleanPart <- cleanPart %>%
-        mutate(MonthsProgramming = as.integer(MonthsProgramming)) %>%
-        mutate(MonthsProgramming = remove_outlier(MonthsProgramming, 744)) %>%
-        mutate(MonthsProgramming = as.integer(MonthsProgramming))
-
-    cat("Finished cleaning responses for number of months programming.\n")
-    cleanPart
-}
-
-
-# Title:
 #   Clean Salary Post Bootcamp
 # Usage:
 #   > cleanPart <- clean_salary_post(cleanPart)
@@ -1574,7 +1532,6 @@ clean_part <- function(part) {
     cleanPart <- clean_expected_earnings(cleanPart)  # Clean expected earnings
     cleanPart <- clean_code_events(cleanPart)   # Clean other coding events
     cleanPart <- clean_podcasts(cleanPart)   # Clean Podcasts Other
-    cleanPart <- clean_months_program(cleanPart)  # Clean months programming
     cleanPart <- clean_salary_post(cleanPart)  # Clean salary post bootcamp
     cleanPart <- clean_money_learning(cleanPart)  # Clean money for learning
     cleanPart <- clean_age(cleanPart)  # Clean age
