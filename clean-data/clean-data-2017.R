@@ -532,8 +532,17 @@ helper_filter <- function(part, col, words, printYes = NA) {
 #   > cleanJob <- clean_job_interest(part)
 clean_job_interest <- function(part) {
     cat("Cleaning responses for other job interests...\n")
+
+    # Job interest columns that need to be changed
+    colsChange <- c("JobInterestFullStack", "JobInterestBackEnd",
+                    "JobInterestFrontEnd", "JobInterestMobile",
+                    "JobInterestDevOps", "JobInterestDataSci",
+                    "JobInterstQAEngr", "JobInterestUX",
+                    "JobInterestProjMngr", "JobInterestGameDev",
+                    "JobInterestDataEngr")
+
     cat("Finished cleaning responses for other job interests.\n")
-    cleanPart
+    part %>% char_to_one(changeCols = colsChange)
 }
 
 
@@ -553,43 +562,20 @@ clean_job_interest_other <- function(part) {
 
     ## Title case answers for other job interests
     ##  See if I can simplify this by just mutating
-    jobRoleOtherYes <- part %>% filter(!is.na(JobRoleInterestOther)) %>%
-        mutate(JobRoleInterestOther = simple_title_case(JobRoleInterestOther))
-    jobRoleOtherNo <- part %>% filter(is.na(JobRoleInterestOther))
+    jobRoleOtherYes <- part %>% filter(!is.na(JobInterestOther)) %>%
+        mutate(JobInterestOther = simple_title_case(JobInterestOther))
+    jobRoleOtherNo <- part %>% filter(is.na(JobInterestOther))
     cleanPart <- jobRoleOtherNo %>% bind_rows(jobRoleOtherYes)
 
     ## Change uncertain job roles to "Undecided"
     undecidedWords <- c("not sure", "don't know", "not certain",
                         "unsure", "dont know", "undecided",
                         "all of the above", "no preference", "not",
-                        "any", "no idea")
+                        "any", "no idea", "idk", "dunno")
     cleanPart <- normalize_text(inData = cleanPart,
                                 columnName = "JobRoleInterestOther",
                                 searchTerms = undecidedWords,
                                 replaceWith = "Undecided")
-
-    ## Normalize cyber security interests to "Cyber Security"
-    ##  e.g. "Cyber security" == "Cybersercurity"
-    cyberWords <- c("cyber", "secure", "penetration tester",
-                    "pentester", "security")
-    cleanPart <- normalize_text(inData = cleanPart,
-                                columnName = "JobRoleInterestOther",
-                                searchTerms = cyberWords,
-                                replaceWith = "Cyber Security")
-
-    ## Normalize game developer interests to "Game Developer"
-    gameWords <- c("game", "games")
-    cleanPart <- normalize_text(inData = cleanPart,
-                                columnName = "JobRoleInterestOther",
-                                searchTerms = gameWords,
-                                replaceWith = "Game Developer")
-
-    ## Normalize software engineer interests to "Software Engineer"
-    softwareWords <- c("software")
-    cleanPart <- normalize_text(inData = cleanPart,
-                                columnName = "JobRoleInterestOther",
-                                searchTerms = softwareWords,
-                                replaceWith = "Software Engineer")
 
     cat("Finished cleaning responses for other job interests.\n")
     cleanPart
@@ -1766,6 +1752,7 @@ clean_part <- function(part) {
     cat("Beginning cleaning of data...\n")
 
     # Clean each column that needs it
+    cleanPart <- clean_job_interest(part) # Clean Job Roles to Binary
     cleanPart <- clean_job_interest_other(part)  # Clean Job Role Interests
     cleanPart <- clean_expected_earnings(cleanPart)  # Clean expected earnings
     cleanPart <- clean_code_events(cleanPart)   # Clean other coding events
