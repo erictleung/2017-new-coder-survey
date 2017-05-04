@@ -1574,7 +1574,6 @@ clean_part <- function(part) {
     cleanPart <- clean_expected_earnings(cleanPart)  # Clean expected earnings
     cleanPart <- clean_code_events(cleanPart)   # Clean other coding events
     cleanPart <- clean_podcasts(cleanPart)   # Clean Podcasts Other
-    cleanPart <- clean_hours_learn(cleanPart)  # Clean hours spent learning
     cleanPart <- clean_months_program(cleanPart)  # Clean months programming
     cleanPart <- clean_salary_post(cleanPart)  # Clean salary post bootcamp
     cleanPart <- clean_money_learning(cleanPart)  # Clean money for learning
