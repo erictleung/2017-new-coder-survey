@@ -590,56 +590,6 @@ clean_job_interest_other <- function(part) {
 clean_expected_earnings <- function(cleanPart1) {
     cat("Cleaning responses for expected earnings...\n")
 
-    # Remove dollar signs from expected earnings
-    dollarIdx <- cleanPart1 %>% select(ExpectedEarning) %>%
-        mutate_each(funs(grepl("\\$", ., ignore.case = TRUE))) %>%
-        unlist(use.names = FALSE)
-    dollarData <- cleanPart1 %>% filter(dollarIdx) %>%
-        mutate(ExpectedEarning = sub("\\$", "", ExpectedEarning))
-    cleanPart1 <- cleanPart1 %>% filter(!dollarIdx) %>% bind_rows(dollarData)
-
-    # Remove commas from expected earnings
-    commaIdx <- cleanPart1 %>% select(ExpectedEarning) %>%
-        mutate_each(funs(grepl(",", ., ignore.case = TRUE))) %>%
-        unlist(use.names = FALSE)
-    commaData <- cleanPart1 %>% filter(commaIdx) %>%
-        mutate(ExpectedEarning = sub(",", "", ExpectedEarning))
-    cleanPart1 <- cleanPart1 %>% filter(!commaIdx) %>% bind_rows(commaData)
-
-    # Remove "k" from expected earnings
-    kIdx <- cleanPart1 %>% select(ExpectedEarning) %>%
-        mutate_each(funs(grepl("k", ., ignore.case = TRUE))) %>%
-        unlist(use.names = FALSE)
-    kData <- cleanPart1 %>% filter(kIdx) %>%
-        mutate(ExpectedEarning = sub("k", "000", ExpectedEarning))
-    cleanPart1 <- cleanPart1 %>% filter(!kIdx) %>% bind_rows(kData)
-
-    # Change range of expected earnings into average
-    rangeIdx <- cleanPart1 %>% select(ExpectedEarning) %>%
-        mutate_each(funs(grepl("-", ., ignore.case = TRUE))) %>%
-        unlist(use.names = FALSE)
-    rangeData <- cleanPart1 %>% filter(rangeIdx) %>%
-        mutate(ExpectedEarning = average_range_earning(ExpectedEarning))
-    cleanPart1 <- cleanPart1 %>% filter(!rangeIdx) %>% bind_rows(rangeData)
-
-    # Remove period from salaries like 50.000 which should be just 50000
-    thousandsIdx <- cleanPart1 %>% select(ExpectedEarning) %>%
-        mutate_each(funs(grepl("^\\d{2}\\.", ., ignore.case = TRUE))) %>%
-        unlist(use.names = FALSE)
-    thousandsData <- cleanPart1 %>% filter(thousandsIdx) %>%
-        mutate(ExpectedEarning = sub("\\.", "", ExpectedEarning))
-    cleanPart1 <- cleanPart1 %>% filter(!thousandsIdx) %>%
-        bind_rows(thousandsData)
-
-    # Remove any non-numeric characters
-    numericIdx <- cleanPart1 %>% select(ExpectedEarning) %>%
-        mutate_each(funs(grepl("[A-Za-z]", ., ignore.case = TRUE))) %>%
-        unlist(use.names = FALSE)
-    numericData <- cleanPart1 %>% filter(numericIdx) %>%
-        mutate(ExpectedEarning = gsub("[A-Za-z']*", "", ExpectedEarning))
-    cleanPart1 <- cleanPart1 %>% filter(!numericIdx) %>%
-        bind_rows(numericData)
-
     # Change all values to numeric for easier manipulation
     cleanPart1 <- cleanPart1 %>%
         mutate(ExpectedEarning = as.integer(ExpectedEarning))
@@ -681,14 +631,6 @@ clean_expected_earnings <- function(cleanPart1) {
         mutate(ExpectedEarning = ExpectedEarning * 12)
     cleanPart1 <- cleanPart1 %>% setdiff(values500to5999) %>%
         bind_rows(change500to5999)
-
-    # Set limit to 200000
-    values200k <- cleanPart1 %>%
-        filter(ExpectedEarning > 200000)
-    change200k <- values200k %>%
-        mutate(ExpectedEarning = 200000)
-    cleanPart1 <- cleanPart1 %>% setdiff(values200k) %>%
-        bind_rows(change200k)
 
     # Change to correct integers e.g. change 0000000 to just 0
     cleanPart1 <- cleanPart1 %>%
