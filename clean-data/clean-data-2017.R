@@ -304,6 +304,30 @@ yesNo_to_oneZero <- function(part2, changeCols) {
 
 
 # Title:
+#   Change Characters to One
+# Description:
+#   Lots of columns need to be changed
+# Input:
+#   Designed for the second dataset
+# Output:
+#   The second dataset with all yes/no answers changed to 1/0
+# Usage:
+#   > part2 <- yesNo_to_oneZero(part2)
+char_to_one <- function(part, changeCols) {
+    fixedPart <- part
+    for (col in changeCols) {
+        varvalOne <- lazyeval::interp(~ ifelse(!is.na(colName),
+                                               yes = "1",
+                                               no = colName),
+                                      colName = as.name(col))
+        fixedPart <- fixedPart %>%
+            mutate_(.dots = setNames(list(varvalOne), col))
+    }
+    fixedPart
+}
+
+
+# Title:
 #   Change to Character
 # Description:
 #   Changes the data type of the given column names into character
