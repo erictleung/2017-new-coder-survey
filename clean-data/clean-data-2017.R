@@ -775,77 +775,6 @@ clean_hours_learn <- function(cleanPart) {
 
 
 # Title:
-#   Clean Salary Post Bootcamp
-# Usage:
-#   > cleanPart <- clean_salary_post(cleanPart)
-clean_salary_post <- function(cleanPart) {
-    cat("Cleaning responses for salaries after bootcamps...\n")
-
-    # Remove outlier salaries
-    cleanPart <- cleanPart %>%
-        mutate(BootcampPostSalary = remove_outlier(BootcampPostSalary, 1e10))
-
-    # Change all values to numeric for easier manipulation
-    cleanPart <- cleanPart %>%
-        mutate(BootcampPostSalary = as.integer(BootcampPostSalary))
-
-    # Expected values < 19 set to NA
-    # Too weird to be monthly income and too small for yearly
-    below19 <- cleanPart %>%
-        filter(BootcampPostSalary < 19)
-    change19 <- below19 %>%
-        mutate(BootcampPostSalary = NA)
-    cleanPart <- cleanPart %>% setdiff(below19) %>% bind_rows(change19)
-
-    # Multiply expected 20--200 by 1000
-    # Too small for monthly, large enough to be annual if 1000x
-    values20to200 <- cleanPart %>%
-        filter(BootcampPostSalary >= 20) %>%
-        filter(BootcampPostSalary <= 200)
-    change20to200 <- values20to200 %>%
-        mutate(BootcampPostSalary = BootcampPostSalary * 1000)
-    cleanPart <- cleanPart %>% setdiff(values20to200) %>%
-        bind_rows(change20to200)
-
-    # Remove expected values 201--499
-    # Too high for annual, too small for monthly
-    values201to499 <- cleanPart %>%
-        filter(BootcampPostSalary >= 201) %>%
-        filter(BootcampPostSalary <= 499)
-    change201to499 <- values201to499 %>%
-        mutate(BootcampPostSalary = NA)
-    cleanPart <- cleanPart %>% setdiff(values201to499) %>%
-        bind_rows(change201to499)
-
-    # Multiply values 500--5999 by 12
-    # Looks like monthly salary for poor and middle-rich countries
-    values500to5999 <- cleanPart %>%
-        filter(BootcampPostSalary >= 500) %>%
-        filter(BootcampPostSalary <= 5999)
-    change500to5999 <- values500to5999 %>%
-        mutate(BootcampPostSalary = BootcampPostSalary * 12)
-    cleanPart <- cleanPart %>% setdiff(values500to5999) %>%
-        bind_rows(change500to5999)
-
-    # Set limit to 200000
-    values200k <- cleanPart %>%
-        filter(BootcampPostSalary > 200000)
-    change200k <- values200k %>%
-        mutate(BootcampPostSalary = 200000)
-    cleanPart <- cleanPart %>% setdiff(values200k) %>%
-        bind_rows(change200k)
-
-    # Change to correct integers e.g. change 0000000 to just 0
-    cleanPart <- cleanPart %>%
-        mutate(BootcampPostSalary = as.integer(BootcampPostSalary)) %>%
-        mutate(BootcampPostSalary = as.character(BootcampPostSalary))
-
-    cat("Finished cleaning responses for salaries after bootcamps.\n")
-    cleanPart
-}
-
-
-# Title:
 #   Clean Money Spent on Learning
 # Usage:
 #   > cleanPart <- clean_money_learning(cleanPart)
@@ -1532,7 +1461,6 @@ clean_part <- function(part) {
     cleanPart <- clean_expected_earnings(cleanPart)  # Clean expected earnings
     cleanPart <- clean_code_events(cleanPart)   # Clean other coding events
     cleanPart <- clean_podcasts(cleanPart)   # Clean Podcasts Other
-    cleanPart <- clean_salary_post(cleanPart)  # Clean salary post bootcamp
     cleanPart <- clean_money_learning(cleanPart)  # Clean money for learning
     cleanPart <- clean_age(cleanPart)  # Clean age
     cleanPart <- clean_mortgage_amt(cleanPart)  # Clean mortgage amount
