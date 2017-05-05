@@ -531,7 +531,7 @@ helper_filter <- function(part, col, words, printYes = NA) {
 # Usage:
 #   > cleanJob <- clean_job_interest(part)
 clean_job_interest <- function(part) {
-    cat("Cleaning responses for other job interests...\n")
+    cat("Cleaning responses for job interests...\n")
 
     # Job interest columns that need to be changed
     colsChange <- c("JobInterestFullStack", "JobInterestBackEnd",
@@ -539,9 +539,9 @@ clean_job_interest <- function(part) {
                     "JobInterestDevOps", "JobInterestDataSci",
                     "JobInterestQAEngr", "JobInterestUX",
                     "JobInterestProjMngr", "JobInterestGameDev",
-                    "JobInterestDataEngr")
+                    "JobInterestDataEngr", "JobInterestInfoSec")
 
-    cat("Finished cleaning responses for other job interests.\n")
+    cat("Finished cleaning responses for job interests.\n")
     part %>% char_to_one(changeCols = colsChange)
 }
 
@@ -1250,7 +1250,7 @@ clean_part <- function(part) {
 
     # Clean each column that needs it
     cleanPart <- clean_job_interest(part) # Clean Job Roles to Binary
-    cleanPart <- clean_job_interest_other(part)  # Clean Job Role Interests
+    cleanPart <- clean_job_interest_other(cleanPart)  # Clean Job Role Interests
     cleanPart <- clean_expected_earnings(cleanPart)  # Clean expected earnings
     cleanPart <- clean_code_events(cleanPart)   # Clean other coding events
     cleanPart <- clean_podcasts(cleanPart)   # Clean Podcasts Other
