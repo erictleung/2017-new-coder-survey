@@ -6,7 +6,7 @@
 #                   function to perform the entire cleaning and combining is
 #                   the `main()` function at the end of this script.
 # Author:           Eric Leung (@erictleung)
-# Last Updated:     2017 April 18th
+# Last Updated:     2017 May 5th
 
 # Load in necessary packages
 require(dplyr)     # Manipulate data
@@ -17,6 +17,7 @@ dataPath1 <- "raw-data/2017-new-coder-survey-part-1.csv"
 dataPath2 <- "raw-data/2017-new-coder-survey-part-2.csv"
 
 # Script Outline
+#   0. Exploratory Functions - used to explore and check data for cleaning
 #   1. Utility Functions - take in arguments to perform simpler transformations
 #   2. Sub-Process Functions - sub components within sub-cleaning functions
 #   3. Sub-Cleaning Functions - smaller components for main processing
