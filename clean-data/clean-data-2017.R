@@ -11,11 +11,10 @@
 # Load in necessary packages
 require(dplyr)     # Manipulate data
 require(tidyr)     # Reshape data
-require(hunspell)  # Check spelling
 
 # Variables
-dataPath1 <- "../raw-data/2017-new-coder-survey-part-1.csv"
-dataPath2 <- "../raw-data/2017-new-coder-survey-part-2.csv"
+dataPath1 <- "raw-data/2017-new-coder-survey-part-1.csv"
+dataPath2 <- "raw-data/2017-new-coder-survey-part-2.csv"
 
 # Script Outline
 #   1. Utility Functions - take in arguments to perform simpler transformations
@@ -1735,7 +1734,7 @@ main <- function(dataPath1, dataPath2) {
 
     # Combine data and create cleaned data
     write.csv(x = final,
-              file = "2017-fCC-New-Coders-Survey-Data.csv",
+              file = "clean-data/2017-fCC-New-Coders-Survey-Data.csv",
               na = "NA",
               row.names = FALSE)
 }

@@ -11,3 +11,6 @@ outDir="./raw-data"
 download :
 	wget -P $(outDir) $(part1)
 	wget -P $(outDir) $(part2)
+
+cleaning :
+	R -e 'source("clean-data/clean-data-2017.R"); main(dataPath1, dataPath2)'
