@@ -995,6 +995,31 @@ clean_children <- function(cleanPart) {
 }
 
 
+# Title:
+#   Clean YouTube
+# Description:
+#   This year's survey allowed multiple choices for the YouTube channels you
+#   watch. So each multiple choice got their own column and needs to be
+#   converted to more boolean values.
+# Usage:
+#   > cleanJob <- clean_youtube(part)
+clean_youtube <- function(part) {
+    cat("Cleaning responses for YouTube channels watched...\n")
+
+    # Job interest columns that need to be changed
+    colsChange <- c("YouTubeCodeCourse", "YouTubeCodingTrain",
+                    "YouTubeCodingTut360", "YouTubeComputerphile",
+                    "YouTubeDerekBanas", "YouTubeDevTips",
+                    "YouTubeEngineeredTruth", "YouTubeFCC",
+                    "YouTubeFunFunFunction", "YouTubeGoogleDev",
+                    "YouTubeLearnCode", "YouTubeLevelUpTuts",
+                    "YouTubeMIT", "YouTubeMozillaHacks",
+                    "YouTubeSimplilearn", "YouTubeTheNewBoston")
+
+    cat("Finished cleaning responses for YouTube channels watched.\n")
+    part %>% char_to_one(changeCols = colsChange)
+}
+
 # Main Process Functions ----------------------------------
 # Description:
 #   These functions encompass the bulk work of the cleaning and transformation
@@ -1261,6 +1286,7 @@ clean_part <- function(part) {
     cleanPart <- clean_resources(cleanPart)  # Clean other resources
     cleanPart <- clean_student_debt(cleanPart)  # Clean student debt amount
     cleanPart <- clean_children(cleanPart)  # Clean children responses
+    cleanPart <- clean_youtube(cleanPart)  # Clean YouTube channels
 
     # Remove unnecessary columns
     cleanPart <- cleanPart %>%
