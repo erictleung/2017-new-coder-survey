@@ -1586,11 +1586,29 @@ polish_data <- function(cleanData) {
         rename(JobRelocateYesNo = JobRelocate) %>%
         mutate(JobRelocateYesNo = as.integer(JobRelocateYesNo)) %>%
         mutate(MoneyForLearning = as.integer(MoneyForLearning)) %>%
-        mutate(StudentDebtOwe = as.integer(StudentDebtOwe))
+        mutate(StudentDebtOwe = as.integer(StudentDebtOwe)) %>%
+        mutate(MonthsProgramming = as.integer(MonthsProgramming)) %>%
+        mutate(HoursLearning = as.integer(HoursLearning))
+
+    # Polish Job Interests
+    cleanData <- cleanData %>%
+        mutate(JobInterestBackEnd = as.integer(JobInterestBackEnd)) %>%
+        mutate(JobInterestDataEngr = as.integer(JobInterestDataEngr)) %>%
+        mutate(JobInterestDataSci = as.integer(JobInterestDataSci)) %>%
+        mutate(JobInterestDevOps = as.integer(JobInterestDevOps)) %>%
+        mutate(JobInterestFrontEnd = as.integer(JobInterestFrontEnd)) %>%
+        mutate(JobInterestFullStack = as.integer(JobInterestFullStack)) %>%
+        mutate(JobInterestGameDev = as.integer(JobInterestGameDev)) %>%
+        mutate(JobInterestInfoSec = as.integer(JobInterestInfoSec)) %>%
+        mutate(JobInterestMobile = as.integer(JobInterestMobile)) %>%
+        mutate(JobInterestProjMngr = as.integer(JobInterestProjMngr)) %>%
+        mutate(JobInterestQAEngr = as.integer(JobInterestQAEngr)) %>%
+        mutate(JobInterestUX = as.integer(JobInterestUX))
 
     # Polish Code Events
     cleanData <- cleanData %>%
         mutate(CodeEventConferences = as.integer(CodeEventConferences)) %>%
+        mutate(CodeEventFCC = as.integer(CodeEventFCC)) %>%
         mutate(CodeEventGirlDev = as.integer(CodeEventGirlDev)) %>%
         mutate(CodeEventHackathons = as.integer(CodeEventHackathons)) %>%
         mutate(CodeEventNodeSchool = as.integer(CodeEventNodeSchool)) %>%
@@ -1644,6 +1662,25 @@ polish_data <- function(cleanData) {
         mutate(PodcastShopTalk = as.integer(PodcastShopTalk)) %>%
         mutate(PodcastTalkPython = as.integer(PodcastTalkPython)) %>%
         mutate(PodcastTheWebAhead = as.integer(PodcastTheWebAhead))
+
+    # Polish YouTube Channels
+    cleanData <- cleanData %>%
+        mutate(YouTubeCodeCourse = as.integer(YouTubeCodeCourse)) %>%
+        mutate(YouTubeCodingTrain = as.integer(YouTubeCodingTrain)) %>%
+        mutate(YouTubeCodingTut360 = as.integer(YouTubeCodingTut360)) %>%
+        mutate(YouTubeComputerphile = as.integer(YouTubeComputerphile)) %>%
+        mutate(YouTubeDerekBanas = as.integer(YouTubeDerekBanas)) %>%
+        mutate(YouTubeDevTips = as.integer(YouTubeDevTips)) %>%
+        mutate(YouTubeEngineeredTruth = as.integer(YouTubeEngineeredTruth)) %>%
+        mutate(YouTubeFCC = as.integer(YouTubeFCC)) %>%
+        mutate(YouTubeFunFunFunction = as.integer(YouTubeFunFunFunction)) %>%
+        mutate(YouTubeGoogleDev = as.integer(YouTubeGoogleDev)) %>%
+        mutate(YouTubeLearnCode = as.integer(YouTubeLearnCode)) %>%
+        mutate(YouTubeLevelUpTuts = as.integer(YouTubeLevelUpTuts)) %>%
+        mutate(YouTubeMIT = as.integer(YouTubeMIT)) %>%
+        mutate(YouTubeMozillaHacks = as.integer(YouTubeMozillaHacks)) %>%
+        mutate(YouTubeSimplilearn = as.integer(YouTubeSimplilearn)) %>%
+        mutate(YouTubeTheNewBoston = as.integer(YouTubeTheNewBoston))
 
     # Order columns alphabetically
     cleanData <- cleanData %>% select(noquote(order(colnames(cleanData))))
