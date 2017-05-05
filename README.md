@@ -8,6 +8,7 @@ Code to help clean and format the 2017 New Coder Survey by freeCodeCamp.
 - [Prerequisites for data cleaning](#prerequisites-for-data-cleaning)
 - [Download survey data](#download-survey-data)
 - [Run script to reproduce clean data](#run-script-to-reproduce-clean-data)
+- [Repository structure](#repository-structure)
 
 ## Introduction
 
@@ -38,4 +39,17 @@ make download
 
 ```
 make cleaning
+```
+
+## Repository structure
+
+```
+.
+├── clean-data
+│   ├── clean-data-2017.R
+│   └── datapackage.json
+├── Makefile
+└── README.md
+
+2 directories, 6 files
 ```
