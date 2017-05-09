@@ -1628,6 +1628,7 @@ polish_data <- function(cleanData) {
         mutate(ResourceCodeWars = as.integer(ResourceCodeWars)) %>%
         mutate(ResourceCodecademy = as.integer(ResourceCodecademy)) %>%
         mutate(ResourceCoursera = as.integer(ResourceCoursera)) %>%
+        mutate(ResourceCSS = as.integer(ResourceCSS)) %>%
         mutate(ResourceEdX = as.integer(ResourceEdX)) %>%
         mutate(ResourceFCC = as.integer(ResourceFCC)) %>%
         mutate(ResourceKA = as.integer(ResourceKA)) %>%
