@@ -20,6 +20,8 @@ described by the [data packages format][datapkg] (WIP).
 The cleaning script `clean-data-2017.R` should be run with the working
 directory in R being the root of this repository.
 
+[datapkg]: http://specs.frictionlessdata.io/simple-data-format/
+
 ## Prerequisites for data cleaning
 
 - [R][r] (>= 3.3.3)
