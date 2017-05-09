@@ -8,6 +8,7 @@ Code to help clean and format the 2017 New Coder Survey by freeCodeCamp.
 - [Prerequisites for data cleaning](#prerequisites-for-data-cleaning)
 - [Download survey data](#download-survey-data)
 - [Run script to reproduce clean data](#run-script-to-reproduce-clean-data)
+- [Read in combined data after cleaning](#read-in-combined-data-after-cleaning)
 - [Repository structure](#repository-structure)
 
 ## Introduction
@@ -29,6 +30,8 @@ directory in R being the root of this repository.
 
 ## Download survey data
 
+The raw survey data will be downloaded into the `raw-data/` directory.
+
 ```
 git clone https://github.com/erictleung/2017-new-coder-survey.git
 cd 2017-new-coder-survey
@@ -37,8 +40,21 @@ make download
 
 ## Run script to reproduce clean data
 
+The clean and combined data will appear in the `clean-data/` directory.
+
 ```
 make cleaning
+```
+
+## Read in combined data after cleaning
+
+From within R, you can run the following to read in the clean data.
+
+```r
+library(dplyr)
+setwd("clean-data") # Change this accordingly
+survey <- read.csv("2017-fCC-New-Coders-Survey-Data.csv",
+                   stringsAsFactors = FALSE) %>% tbl_df()
 ```
 
 ## Repository structure
