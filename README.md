@@ -15,12 +15,14 @@ Code to help clean and format the 2017 New Coder Survey by freeCodeCamp.
 
 The survey data is cleaned and the metadata (i.e. the data dictionary) is in
 the `datapackage.json` file, which follows closely to the specifications
-described by the [data packages format][datapkg] (WIP).
+described by the [data packages format][datapkg]. The format was generated with
+the help of [Data Packagist][packagist].
 
 The cleaning script `clean-data-2017.R` should be run with the working
 directory in R being the root of this repository.
 
 [datapkg]: http://specs.frictionlessdata.io/simple-data-format/
+[packagist]: http://datapackagist.openknowledge.io/
 
 ## Prerequisites for data cleaning
 
