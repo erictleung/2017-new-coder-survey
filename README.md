@@ -71,5 +71,5 @@ survey <- read.csv("2017-fCC-New-Coders-Survey-Data.csv",
 ├── Makefile
 └── README.md
 
-2 directories, 6 files
+2 directories, 4 files
 ```
