@@ -5,7 +5,10 @@
   "homepage": "https://github.com/freeCodeCamp/2017-new-coder-survey",
   "version": "0.0.1",
   "license": "Open Database License",
-  "author": "Eric Leung",
+  "author": {
+    "name": "Eric Leung",
+    "web": "https://erictleung.com"
+  },
   "resources": [
     {
       "name": "2017-fcc-new-coders-survey-data.csv",
