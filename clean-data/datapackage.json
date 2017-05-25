@@ -8,7 +8,7 @@
   "author": "Eric Leung",
   "resources": [
     {
-      "name": "2017-fCC-New-Coders-Survey-Data.csv",
+      "name": "2017-fcc-new-coders-survey-data.csv",
       "title": "2017 fCC New Coders Survey Data",
       "description": "A single combined file, comprised of the two-part new coders' survey conducted by freeCodeCamp.",
       "schema": {
